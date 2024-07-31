@@ -6,6 +6,13 @@ __pycache__/
 # C extensions
 *.so
 
+# /fine_tuning/data/
+/fine_tuning/data/Keypoints_dataset
+/fine_tuning/data/tennis-ball-detection
+/models/
+/fine_tuning/runs/detect/train/weights/best.pt
+/fine_tuning/runs/detect/train/weights/last.pt
+
 # Distribution / packaging
 .Python
 build/

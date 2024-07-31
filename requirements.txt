@@ -1,0 +1,6 @@
+ultralytics
+numpy
+pandas
+torch
+opencv-python
+tensorboard
