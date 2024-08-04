@@ -47,6 +47,11 @@ class KeypointsDataset(Dataset):
 
         return img , kps
 
+def load_checkpoint(filepath, model):
+    checkpoint = torch.load(filepath)
+    model.load_state_dict(checkpoint)
+    return model
+
 def train_one_epoch(epoch_index):
     running_loss = []
 
@@ -80,18 +85,21 @@ if __name__ == "__main__":
 
     model = models.resnet50(weights=models.ResNet50_Weights.IMAGENET1K_V1)
     model.fc =  torch.nn.Linear(model.fc.in_features, 14*2)
+
+    # load checkpoint
+    model = load_checkpoint('/teamspace/studios/this_studio/Tennis-Analysis-system/models/keypoints/model_last.pth', model)
     
     model = model.to(device)
     criterion = torch.nn.MSELoss()
-    optimizer = torch.optim.Adam(model.parameters(), lr=1e-3)
+    optimizer = torch.optim.Adam(model.parameters(), lr=1e-4)
     
     timestamp = datetime.now().strftime('%Y%m%d_%H%M%S')
-    writer = SummaryWriter('runs/trainer_{}'.format(timestamp))
+    writer = SummaryWriter('runs/trainer_SGD{}'.format(timestamp))
 
     epoch_number = 0
     EPOCHS = 25
     best_vloss = 1_000_000.
-    BATCH_SIZE = 128 
+    BATCH_SIZE = 64 
 
     train_loader = DataLoader(train_dataset, batch_size=BATCH_SIZE, shuffle=True)
     val_loader = DataLoader(val_dataset, batch_size=BATCH_SIZE, shuffle=True)
