@@ -31,6 +31,9 @@ def main():
     # Select Player from other People 
     player_detections = player_tracker.filter_players_from_other_people(player_detections, keypoints)
 
+    # get ball shots frames
+    ball_shots_frames = ball_tracker.get_ball_shot_frames(ball_detections)
+    
     # draw mini court
     Mini_Court = MiniCourt(video_frames[0])
     output_video_frames = Mini_Court.draw_mini_court(video_frames)

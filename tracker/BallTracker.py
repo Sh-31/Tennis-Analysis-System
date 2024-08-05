@@ -38,6 +38,39 @@ class BallTracker:
         
         return ball_detections
 
+    def get_ball_shot_frames(self, ball_positions):
+
+        ball_positions = [x.get(1,[]) for x in ball_positions]
+        # convert the list into pandas dataframe
+        df_ball_positions = pd.DataFrame(ball_positions,columns=['x1','y1','x2','y2'])
+
+        # interpolate the missing values
+        df_ball_positions = df_ball_positions.interpolate()
+        df_ball_positions = df_ball_positions.bfill()
+        df_ball_positions['mid_y'] = (df_ball_positions['y1'] + df_ball_positions['y2'])/2
+        df_ball_positions['mid_y_rolling_mean'] = df_ball_positions['mid_y'].rolling(window=5, min_periods=1, center=False).mean()
+        df_ball_positions['delta_y'] = df_ball_positions['mid_y_rolling_mean'].diff() # Different between two consecutive Y-Mean-axis row wais
+
+        df_ball_positions['ball_hit'] = 0
+        minimum_change_frames_for_hit = 9 
+        counter = 0
+
+        for i in range(1, len(df_ball_positions)):
+            current_change = df_ball_positions['delta_y'].iloc[i] > 0
+            previous_change = df_ball_positions['delta_y'].iloc[i - 1] > 0
+
+            if current_change != previous_change:
+                if counter >= minimum_change_frames_for_hit:
+                    df_ball_positions.loc[i - 1, 'ball_hit'] = 1
+                counter = 0
+                change_direction = 'pos' if current_change else 'neg'
+            else:
+                counter += 1
+
+        frame_nums_with_ball_hits = df_ball_positions[df_ball_positions['ball_hit'] == 1].index.tolist()
+        
+        return frame_nums_with_ball_hits
+
     def detect_frame(self,frame):
         results = self.model.predict(frame,conf=0.15)
 
