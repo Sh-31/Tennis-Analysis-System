@@ -38,6 +38,11 @@ def main():
     Mini_Court = MiniCourt(video_frames[0])
     output_video_frames = Mini_Court.draw_mini_court(video_frames)
 
+    # draw player and ball in mini court
+    player_mini_court_detections , ball_mini_court_detections = Mini_Court.convert_bbox_to_mini_court_coordinates(player_detections, ball_detections, keypoints)
+    output_video_frames = Mini_Court.draw_points_on_mini_court(output_video_frames,player_mini_court_detections)
+    output_video_frames = Mini_Court.draw_points_on_mini_court(output_video_frames,ball_mini_court_detections, color=(0,255,255))    
+
     # Draw Player Bounding Boxes
     output_video_frames = player_tracker.draw_bboxes(output_video_frames, player_detections)
     output_video_frames = ball_tracker.draw_bboxes(output_video_frames, ball_detections)
