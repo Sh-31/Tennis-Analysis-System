@@ -24,6 +24,7 @@ python main.py (windows)
 https://github.com/user-attachments/assets/a70c4bc2-ae41-43ff-a851-6c501d04955f
 
 
+
 ## Datasets
 ---
 #### Ball Detection
@@ -37,9 +38,28 @@ For keypoint detection, we used a dataset collected by yastrebksv. You can downl
 You can also download it using the code provided in the `Tennis-Analysis-system\fine_tuning\explore.ipynb` notebook.
 
 ## Results
+
 ---
 
+### Fine-tuning YOLOv5 for Ball Detection
 
+| Epoch | Train/Box Loss | Train/Cls Loss | Train/Dfl Loss | Precision (B) | Recall (B) | Val/Box Loss | Val/Cls Loss |
+|-------|----------------|----------------|----------------|---------------|------------|--------------|--------------|
+| 95    | 2.052          | 0.94742        | 0.86513        | 0.76142       | 0.53465    | 1.9983       | 1.1024       |
+| 96    | 1.9937         | 0.90107        | 0.83483        | 0.71385       | 0.46934    | 2.0944       | 1.1647       |
+| 97    | 1.9396         | 0.88057        | 0.83543        | 0.73493       | 0.48515    | 2.1743       | 1.233        |
+| 98    | 1.9461         | 0.92784        | 0.82794        | 0.72858       | 0.50497    | 2.1229       | 1.2019       |
+| 99    | 1.8929         | 0.82987        | 0.83066        | 0.74648       | 0.49505    | 2.0971       | 1.1892       |
+| 100   | 1.933          | 0.88627        | 0.84558        | 0.75446       | 0.49505    | 2.1242       | 1.1936       |
+
+
+![results YOLOv5 for Ball Detection](fine_tuning/runs/detect/train/results.png)
+
+![](fine_tuning/runs/detect/train/confusion_matrix.png)
+
+### Fine-tuning ResNet50 for Keypoint Detection
+
+![alt text](docs/image.png)
 
 ## Features
 ---

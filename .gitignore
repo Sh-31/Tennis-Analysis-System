@@ -9,7 +9,7 @@ __pycache__/
 # /fine_tuning/data/
 /fine_tuning/data/Keypoints_dataset
 /fine_tuning/data/tennis-ball-detection
-/models/keypoints/
+# /models/keypoints/
 # /models/
 
 # Distribution / packaging

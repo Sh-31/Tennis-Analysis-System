@@ -87,19 +87,19 @@ if __name__ == "__main__":
     model.fc =  torch.nn.Linear(model.fc.in_features, 14*2)
 
     # load checkpoint
-    model = load_checkpoint('/teamspace/studios/this_studio/Tennis-Analysis-system/models/keypoints/model_last.pth', model)
+    # model = load_checkpoint('/teamspace/studios/this_studio/Tennis-Analysis-system/models/keypoints/keypoints_model.pth', model)
     
     model = model.to(device)
     criterion = torch.nn.MSELoss()
-    optimizer = torch.optim.Adam(model.parameters(), lr=1e-4)
+    optimizer = torch.optim.SGD(model.parameters(), lr=1e-4)
     
     timestamp = datetime.now().strftime('%Y%m%d_%H%M%S')
     writer = SummaryWriter('runs/trainer_SGD{}'.format(timestamp))
 
     epoch_number = 0
-    EPOCHS = 25
+    EPOCHS = 15
     best_vloss = 1_000_000.
-    BATCH_SIZE = 64 
+    BATCH_SIZE = 8 
 
     train_loader = DataLoader(train_dataset, batch_size=BATCH_SIZE, shuffle=True)
     val_loader = DataLoader(val_dataset, batch_size=BATCH_SIZE, shuffle=True)

@@ -25,7 +25,7 @@ def main():
     ball_detections = ball_tracker.interpolate_ball_positions(ball_detections)
    
     # Load keypoints model and inference 
-    keypoints_model_path = "models/keypoints/keypoints_model.pth"
+    keypoints_model_path = "models/keypoints/model_last.pth"
     keypoints_detector = KeypointsDetector(model_path=keypoints_model_path)
     keypoints = keypoints_detector.predict(video_frames[0])
 
