@@ -2,14 +2,11 @@
 ---
 Tennis-Analysis-System is a system that analyzes tennis matches and provides player statistics and mini court visualizations and It utilizes YOLO (You Only Look Once) v8x for player detection and tracking, and fine-tunes YOLOv5 for ball detection and tracking. Additionally, a ResNet50 model is used for keypoint detection and tracking.
 
-
 ## Usage
 ---
-To install the Tennis-Analysis-system project, follow these steps:
-
 1. Clone the repository:
 ```shell
-git clone https://github.com/Sh-31/Tennis-Analysis-system.git
+git clone https://github.com/Sh-31/Tennis-Analysis-System.git
 ```
 2. Install the required dependencies:
 ```shell
@@ -24,9 +21,8 @@ python main.py (windows)
 
 ## Sample Output
 ---
-<video width="600" controls>
-  <source src="output_videos/output_video.mp4" type="video/mp4">
-</video>
+https://github.com/user-attachments/assets/a70c4bc2-ae41-43ff-a851-6c501d04955f
+
 
 ## Datasets
 ---
