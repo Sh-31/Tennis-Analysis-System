@@ -21,7 +21,8 @@ python main.py (windows)
 
 ## Sample Output
 ---
-https://github.com/user-attachments/assets/a70c4bc2-ae41-43ff-a851-6c501d04955f
+https://github.com/user-attachments/assets/b84af675-a264-4bbc-b265-40c2e8817670
+
 
 
 
