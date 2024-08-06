@@ -1,8 +1,9 @@
 import cv2
 import pandas as pd
-from utils import read_video , save_video
+from utils import read_video , save_video , calculate_player_statistics , draw_player_stats
 from tracker import PlayerTracker , BallTracker , KeypointsDetector
 from mini_court import MiniCourt
+
 def main():
     # Read Video
     input_video_path = "sample_data/input_video.mp4"
@@ -42,6 +43,14 @@ def main():
     player_mini_court_detections , ball_mini_court_detections = Mini_Court.convert_bbox_to_mini_court_coordinates(player_detections, ball_detections, keypoints)
     output_video_frames = Mini_Court.draw_points_on_mini_court(output_video_frames,player_mini_court_detections)
     output_video_frames = Mini_Court.draw_points_on_mini_court(output_video_frames,ball_mini_court_detections, color=(0,255,255))    
+
+    # calculate and draw player statistics
+    player_stat = calculate_player_statistics(ball_shots_frames=ball_shots_frames, 
+                                ball_mini_court_detections=ball_mini_court_detections,
+                                player_mini_court_detections=player_mini_court_detections,
+                                video_frames_number=len(video_frames))
+
+    output_video_frames = draw_player_stats(output_video_frames, player_stat)                            
 
     # Draw Player Bounding Boxes
     output_video_frames = player_tracker.draw_bboxes(output_video_frames, player_detections)

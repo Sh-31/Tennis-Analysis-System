@@ -1,4 +1,5 @@
 from ultralytics import YOLO 
+import os
 import cv2
 
 if __name__ == "__main__":
@@ -19,4 +20,7 @@ if __name__ == "__main__":
     input_file = 'output_videos/output_video.avi'
     output_file = 'output_videos/output_video.mp4'
 
+    if  os.path.exists(output_file):
+        os.remove(output_file)
+        
     ffmpeg.input(input_file).output(output_file).run()
